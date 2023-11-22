@@ -1,0 +1,26 @@
+type Patient = record {
+  id : text;
+  status : text;
+  birthDate : nat64;
+  createdAt : nat64;
+  updatedAt : opt nat64;
+  lastName : text;
+  firstName : text;
+};
+type PatientPayload = record {
+  birthDate : nat64;
+  lastName : text;
+  firstName : text;
+};
+type _AzleResult = variant { Ok : Patient; Err : text };
+type _AzleResult_1 = variant { Ok : vec Patient; Err : text };
+type _AzleResult_2 = variant { Ok : text; Err : text };
+service : () -> {
+  addPatient : (PatientPayload) -> (_AzleResult);
+  deletePatient : (text) -> (_AzleResult);
+  getPatient : (text) -> (_AzleResult) query;
+  getPatients : () -> (_AzleResult_1) query;
+  getPatientsByStatus : (text) -> (_AzleResult_1) query;
+  updatePatient : (text, PatientPayload) -> (_AzleResult);
+  updatePatientStatus : (text, text) -> (_AzleResult_2);
+}
